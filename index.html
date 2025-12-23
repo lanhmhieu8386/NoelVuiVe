@@ -378,7 +378,7 @@
         }
       }
       const isMobile = window.innerWidth < 768;
-      const photoScale = isMobile ? 4 : 6;
+      const photoScale = isMobile ? 2.8 : 6;
 
       // Vòng lặp vẽ
       function animate() {
@@ -445,7 +445,7 @@
         } else if (state === "PHOTO") {
           photoMeshes.forEach((mesh, i) => {
             if (i === selectedIndex) {
-            const photoZ = isMobile ? 60 : 40;
+            const photoZ = isMobile ? 65 : 40;
 mesh.position.lerp(new THREE.Vector3(0, 0, photoZ), 0.1);
               mesh.scale.lerp(
                 new THREE.Vector3(photoScale, photoScale, photoScale),
@@ -564,6 +564,7 @@ mesh.position.lerp(new THREE.Vector3(0, 0, photoZ), 0.1);
     </script>
   </body>
 </html>
+
 
 
 
