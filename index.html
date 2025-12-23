@@ -444,7 +444,7 @@
         } else if (state === "PHOTO") {
           photoMeshes.forEach((mesh, i) => {
             if (i === selectedIndex) {
-            mesh.position.lerp(new THREE.Vector3(0, 0, 30), 0.1);
+            mesh.position.lerp(new THREE.Vector3(0, 0, 45), 0.1);
 mesh.scale.lerp(new THREE.Vector3(photoScale, photoScale, photoScale), 0.1);
   mesh.lookAt(camera.position);
   mesh.rotation.y += (handRotY - mesh.rotation.y) * 0.1;
@@ -552,6 +552,7 @@ document.body.addEventListener("touchend", () => {
     </script>
   </body>
 </html>
+
 
 
 
