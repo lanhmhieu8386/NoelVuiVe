@@ -378,7 +378,7 @@
         }
       }
  const isMobile = window.innerWidth < 768;
-          const photoScale = isMobile ? 3 : 5;
+          const photoScale = isMobile ? 6 : 5;
       // Vòng lặp vẽ
       function animate() {
         requestAnimationFrame(animate);
@@ -444,10 +444,11 @@
         } else if (state === "PHOTO") {
           photoMeshes.forEach((mesh, i) => {
             if (i === selectedIndex) {
-              mesh.position.lerp(new THREE.Vector3(0, 0, 60), 0.1);
-            new THREE.Vector3(photoScale, photoScale, photoScale), 0.1;
-              mesh.lookAt(camera.position);
-               mesh.rotation.y += (handRotY - mesh.rotation.y) * 0.1;
+             mesh.position.lerp(new THREE.Vector3(0, 0, 60), 0.1);
+  mesh.scale.lerp(new THREE.Vector3(photoScale, photoScale, photoScale), 0.1);
+  mesh.lookAt(camera.position);
+  mesh.rotation.y += (handRotY - mesh.rotation.y) * 0.1;
+
             } else {
               mesh.scale.lerp(new THREE.Vector3(0, 0, 0), 0.1);
             }
@@ -551,5 +552,6 @@ document.body.addEventListener("touchend", () => {
     </script>
   </body>
 </html>
+
 
 
