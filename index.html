@@ -482,7 +482,26 @@
 
         // Chỉ khi click/tap mới đổi trạng thái
         document.body.addEventListener("click", toggleState);
-        document.body.addEventListener("touchstart", toggleState);
+        let touchStartX = 0;
+let touchMoved = false;
+
+document.body.addEventListener("touchstart", (e) => {
+  touchStartX = e.touches[0].clientX;
+  touchMoved = false;
+});
+
+document.body.addEventListener("touchmove", (e) => {
+  touchMoved = true;
+  handX = e.touches[0].clientX / window.innerWidth;
+});
+
+document.body.addEventListener("touchend", () => {
+  if (!touchMoved) {
+    // Nếu không vuốt → coi là tap → đổi trạng thái
+    toggleState();
+  }
+});
+
         // Điều khiển xoay bằng chuột
         document.addEventListener("mousemove", (e) => {
           handX = e.clientX / window.innerWidth;
@@ -532,4 +551,5 @@
     </script>
   </body>
 </html>
+
 
