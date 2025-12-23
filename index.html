@@ -377,8 +377,8 @@
           group.rotation.y += (handRotY - group.rotation.y) * 0.05;
         }
       }
-const isMobile = window.innerWidth < 768;
-const photoScale = isMobile ? 2 : 6;
+      const isMobile = window.innerWidth < 768;
+      const photoScale = isMobile ? 2 : 4;
 
       // Vòng lặp vẽ
       function animate() {
@@ -445,11 +445,17 @@ const photoScale = isMobile ? 2 : 6;
         } else if (state === "PHOTO") {
           photoMeshes.forEach((mesh, i) => {
             if (i === selectedIndex) {
-            mesh.position.lerp(new THREE.Vector3(0, 0, 40), 0.1);
-mesh.scale.lerp(new THREE.Vector3(photoScale, photoScale, photoScale), 0.1);
-  mesh.lookAt(camera.position);
-  mesh.rotation.y += (handRotY - mesh.rotation.y) * 0.1;
+              mesh.position.lerp(new THREE.Vector3(0, 0, 80), 0.1);
+              mesh.scale.lerp(
+                new THREE.Vector3(photoScale, photoScale, photoScale),
+                0.1
+              );
+              mesh.lookAt(camera.position);
+              mesh.rotation.y += (handRotY - mesh.rotation.y) * 0.1;
 
+              console.log("photoScale:", photoScale);
+              console.log("mesh.scale:", mesh.scale);
+              console.log("mesh.position:", mesh.position);
             } else {
               mesh.scale.lerp(new THREE.Vector3(0, 0, 0), 0.1);
             }
@@ -485,24 +491,24 @@ mesh.scale.lerp(new THREE.Vector3(photoScale, photoScale, photoScale), 0.1);
         // Chỉ khi click/tap mới đổi trạng thái
         document.body.addEventListener("click", toggleState);
         let touchStartX = 0;
-let touchMoved = false;
+        let touchMoved = false;
 
-document.body.addEventListener("touchstart", (e) => {
-  touchStartX = e.touches[0].clientX;
-  touchMoved = false;
-});
+        document.body.addEventListener("touchstart", (e) => {
+          touchStartX = e.touches[0].clientX;
+          touchMoved = false;
+        });
 
-document.body.addEventListener("touchmove", (e) => {
-  touchMoved = true;
-  handX = e.touches[0].clientX / window.innerWidth;
-});
+        document.body.addEventListener("touchmove", (e) => {
+          touchMoved = true;
+          handX = e.touches[0].clientX / window.innerWidth;
+        });
 
-document.body.addEventListener("touchend", () => {
-  if (!touchMoved) {
-    // Nếu không vuốt → coi là tap → đổi trạng thái
-    toggleState();
-  }
-});
+        document.body.addEventListener("touchend", () => {
+          if (!touchMoved) {
+            // Nếu không vuốt → coi là tap → đổi trạng thái
+            toggleState();
+          }
+        });
 
         // Điều khiển xoay bằng chuột
         document.addEventListener("mousemove", (e) => {
@@ -553,13 +559,3 @@ document.body.addEventListener("touchend", () => {
     </script>
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-
