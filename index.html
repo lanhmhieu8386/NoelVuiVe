@@ -378,7 +378,7 @@
         }
       }
       const isMobile = window.innerWidth < 768;
-      const photoScale = isMobile ? 10 : 6;
+      const photoScale = isMobile ? 4 : 6;
 
       // Vòng lặp vẽ
       function animate() {
@@ -445,11 +445,16 @@
         } else if (state === "PHOTO") {
           photoMeshes.forEach((mesh, i) => {
             if (i === selectedIndex) {
-              mesh.position.lerp(new THREE.Vector3(0, 0, 40), 0.1);
+            const photoZ = isMobile ? 60 : 40;
+mesh.position.lerp(new THREE.Vector3(0, 0, photoZ), 0.1);
               mesh.scale.lerp(
                 new THREE.Vector3(photoScale, photoScale, photoScale),
                 0.1
               );
+
+               mesh.scale.x = Math.min(mesh.scale.x, photoScale);
+      mesh.scale.y = Math.min(mesh.scale.y, photoScale);
+      mesh.scale.z = Math.min(mesh.scale.z, photoScale);
               mesh.lookAt(camera.position);
               mesh.rotation.y += (handRotY - mesh.rotation.y) * 0.1;
 
@@ -559,6 +564,7 @@
     </script>
   </body>
 </html>
+
 
 
 
